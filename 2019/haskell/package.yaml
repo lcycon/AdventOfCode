@@ -1,0 +1,48 @@
+name:                AdventOfCode2019
+version:             0.1.0.0
+github:              "lcycon/AdventOfCode2019"
+license:             MIT
+author:              "Luke Cycon"
+maintainer:          "luke@lukecycon"
+copyright:           "2019 Luke Cycon"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/lcycon/AdventOfCode2019#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- vector
+
+library:
+  source-dirs: src
+  dependencies:
+    - attoparsec
+    - text
+    - unordered-containers
+  ghc-options:
+  - -Wall
+  - -Werror
+
+executables:
+  AoC2019:
+    main:                Main
+    source-dirs:         app
+    dependencies:
+      - AdventOfCode2019
+      - advent-of-code-api
+      - attoparsec
+      - extra
+      - hashable
+      - optparse-generic
+      - split
+      - text
+      - unordered-containers
+      - xdg-basedir
+    ghc-options:
+    - -Wall
+    - -Werror
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N

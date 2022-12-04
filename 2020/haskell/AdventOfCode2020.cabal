@@ -1,0 +1,97 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 268c01ab743e68e4c0b4a79c9f8c2a57154f533f4da09f53efd7ba17ff9d7f66
+
+name:           AdventOfCode2020
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/lcycon/AdventOfCode2020#readme>
+homepage:       https://github.com/lcycon/AdventOfCode2020#readme
+bug-reports:    https://github.com/lcycon/AdventOfCode2020/issues
+author:         Luke Cycon
+maintainer:     luke@lukecycon
+copyright:      2019 Luke Cycon
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/lcycon/AdventOfCode2020
+
+library
+  exposed-modules:
+      Common
+      Day1
+      Day2
+      Day3
+      Day4
+      Day5
+      Lib
+  other-modules:
+      Paths_AdventOfCode2020
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Werror
+  build-depends:
+      advent-of-code-api
+    , barbies
+    , base >=4.7 && <5
+    , dotenv
+    , parsec
+    , pretty-terminal
+    , refined
+    , text
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
+
+executable AdventOfCode2020-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_AdventOfCode2020
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      AdventOfCode2020
+    , advent-of-code-api
+    , barbies
+    , base >=4.7 && <5
+    , dotenv
+    , parsec
+    , pretty-terminal
+    , refined
+    , text
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
+
+test-suite AdventOfCode2020-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_AdventOfCode2020
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      AdventOfCode2020
+    , advent-of-code-api
+    , barbies
+    , base >=4.7 && <5
+    , dotenv
+    , hspec
+    , parsec
+    , pretty-terminal
+    , refined
+    , text
+    , unordered-containers
+    , vector
+  default-language: Haskell2010

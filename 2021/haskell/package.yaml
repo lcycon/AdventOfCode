@@ -1,0 +1,62 @@
+name:                AdventOfCode2021
+version:             0.1.0.0
+github:              "lcycon/AdventOfCode2021"
+license:             BSD3
+author:              "Luke Cycon"
+maintainer:          "luke@lukecycon"
+copyright:           "2019 Luke Cycon"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/lcycon/AdventOfCode2021#readme>
+
+ghc-options:
+  - -Wall
+  - -Wno-incomplete-patterns
+  - -Werror
+
+dependencies:
+- base
+- advent-of-code-api == 0.2.8.1
+- dotenv
+- text
+- pretty-terminal
+- parsec
+- containers
+- unordered-containers
+- lens
+
+library:
+  source-dirs: src
+
+executables:
+  AdventOfCode2021-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - AdventOfCode2021
+
+tests:
+  AdventOfCode2021-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - AdventOfCode2021
+    - hspec

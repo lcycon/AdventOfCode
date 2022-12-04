@@ -1,0 +1,4 @@
+.stack-work/
+AdventOfCode2019.cabal
+*~
+data/*.answer

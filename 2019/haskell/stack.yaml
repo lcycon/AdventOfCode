@@ -1,0 +1,12 @@
+resolver: lts-14.16
+
+packages:
+  - .
+
+extra-deps:
+  - advent-of-code-api-0.2.7.0
+
+nix:
+  enable: true
+  packages:
+    - zlib

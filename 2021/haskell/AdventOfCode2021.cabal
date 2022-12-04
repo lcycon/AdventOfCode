@@ -1,0 +1,92 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.5.
+--
+-- see: https://github.com/sol/hpack
+
+name:           AdventOfCode2021
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/lcycon/AdventOfCode2021#readme>
+homepage:       https://github.com/lcycon/AdventOfCode2021#readme
+bug-reports:    https://github.com/lcycon/AdventOfCode2021/issues
+author:         Luke Cycon
+maintainer:     luke@lukecycon
+copyright:      2019 Luke Cycon
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/lcycon/AdventOfCode2021
+
+library
+  exposed-modules:
+      Common
+      Common.List
+      Day1
+      Day2
+      Day3
+      Day4
+      Lib
+  other-modules:
+      Paths_AdventOfCode2021
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wno-incomplete-patterns -Werror
+  build-depends:
+      advent-of-code-api ==0.2.8.1
+    , base
+    , containers
+    , dotenv
+    , lens
+    , parsec
+    , pretty-terminal
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+executable AdventOfCode2021-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_AdventOfCode2021
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wno-incomplete-patterns -Werror -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      AdventOfCode2021
+    , advent-of-code-api ==0.2.8.1
+    , base
+    , containers
+    , dotenv
+    , lens
+    , parsec
+    , pretty-terminal
+    , text
+    , unordered-containers
+  default-language: Haskell2010
+
+test-suite AdventOfCode2021-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_AdventOfCode2021
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wno-incomplete-patterns -Werror -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      AdventOfCode2021
+    , advent-of-code-api ==0.2.8.1
+    , base
+    , containers
+    , dotenv
+    , hspec
+    , lens
+    , parsec
+    , pretty-terminal
+    , text
+    , unordered-containers
+  default-language: Haskell2010
