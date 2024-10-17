@@ -20,6 +20,8 @@
             openssl
             pkg-config
           ];
+
+          CARGO_UNSTABLE_SPARSE_REGISTRY="true";
         };
       }
     );

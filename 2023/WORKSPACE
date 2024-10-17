@@ -1,0 +1,77 @@
+# Give your project a name. :)
+workspace(name = "aoc_2023")
+
+# Load the repository rule to download an http archive.
+load(
+    "@bazel_tools//tools/build_defs/repo:http.bzl",
+    "http_archive",
+)
+
+# Download rules_haskell and make it accessible as "@rules_haskell".
+http_archive(
+    name = "rules_haskell",
+    sha256 = "4cae22bc84f327bf3cb7605021c3663160ff6bc8a0b7b6266062366bcbd19e79",
+    strip_prefix = "rules_haskell-1.0",
+    url = "https://github.com/tweag/rules_haskell/releases/download/v1.0/rules_haskell-1.0.tar.gz",
+)
+
+load(
+    "@rules_haskell//haskell:repositories.bzl",
+    "rules_haskell_dependencies",
+)
+
+# Setup all Bazel dependencies required by rules_haskell.
+rules_haskell_dependencies()
+
+# Load nixpkgs_git_repository from rules_nixpkgs,
+# which was already initialized by rules_haskell_dependencies above.
+load(
+    "@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl",
+    "nixpkgs_cc_configure",
+    "nixpkgs_git_repository",
+    "nixpkgs_package",
+    "nixpkgs_python_configure",
+)
+
+# Fetch a version of nixpkgs from GitHub.
+# For more information see the documentation of rules_nixpkgs at
+# https://github.com/tweag/rules_nixpkgs/blob/master/README.md
+nixpkgs_git_repository(
+    name = "nixpkgs",
+    revision = "master",
+)
+
+nixpkgs_cc_configure(
+    repository = "@nixpkgs",
+)
+
+nixpkgs_python_configure(
+    repository = "@nixpkgs",
+)
+
+load(
+    "@rules_haskell//haskell:nixpkgs.bzl",
+    "haskell_register_ghc_nixpkgs",
+)
+
+# Fetch a GHC binary distribution from nixpkgs and register it as a toolchain.
+# For more information:
+# https://api.haskell.build/haskell/nixpkgs.html#haskell_register_ghc_nixpkgs
+haskell_register_ghc_nixpkgs(
+    attribute_path = "haskell.compiler.ghc981",
+    repository = "@nixpkgs",
+    version = "9.8.1",
+)
+
+# For zlib.BUILD.bazel
+nixpkgs_package(
+    name = "nixpkgs_zlib",
+    attribute_path = "zlib",
+    repository = "@nixpkgs",
+)
+
+nixpkgs_package(
+    name = "zlib.dev",
+    build_file = "//:zlib.BUILD.bazel",
+    repository = "@nixpkgs",
+)
