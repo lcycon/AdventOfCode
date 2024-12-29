@@ -1,0 +1,22 @@
+spec-version: 0.36.0
+name: aoc2024
+version: 0.1.0.0
+category: Development
+
+ghc-options: -Wall
+
+default-extensions:
+  - OverloadedRecordDot
+
+dependencies:
+  - base
+  - advent-of-code-api
+  - containers
+  - unordered-containers
+  - text
+  - vector
+
+executable:
+  main: Main.hs
+  source-dirs: app
+  dependencies: []
