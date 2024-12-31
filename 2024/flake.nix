@@ -11,6 +11,10 @@
           config.allowUnfree = true;
         };
       in {
-        devShell = pkgs.mkShell { buildInputs = with pkgs; [ swi-prolog ]; };
+        devShells = {
+          haskell = pkgs.callPackage ./haskell/shell.nix {};
+          prolog = pkgs.callPackage ./prolog/shell.nix {};
+          rust = pkgs.callPackage ./rust/shell.nix {};
+        };
       });
 }

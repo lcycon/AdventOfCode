@@ -58,9 +58,6 @@ fn solve_single_part1(total: u64, numbers: &[u64]) -> std::io::Result<bool> {
     ctx.assert(ctx.eq(*results.last().unwrap(), ctx.numeral(total)))?;
 
     let result = ctx.check()?;
-    // println!("Solve: {:?}", result);
-    // let model = ctx.get_model()?;
-    // println!("Model: {}", ctx.display(model));
 
     Ok(result == Response::Sat)
 }
@@ -204,9 +201,6 @@ fn solve_single_part2(total: u64, numbers: &[u64]) -> std::io::Result<bool> {
     ctx.assert(ctx.eq(*results.last().unwrap(), ctx.numeral(total)))?;
 
     let result = ctx.check()?;
-    // println!("Solve: {:?}", result);
-    // let model = ctx.get_model()?;
-    // println!("Model: {}", ctx.display(model));
 
     Ok(result == Response::Sat)
 }

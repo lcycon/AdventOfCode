@@ -1,9 +1,12 @@
+#![feature(let_chains)]
+
 use std::collections::HashMap;
 
 use clap::Parser;
 use lazy_static::lazy_static;
 
 mod days;
+pub mod util;
 
 type PartFunc = fn(&str) -> u64;
 
@@ -19,6 +22,8 @@ lazy_static! {
         ((9u8, 2u8), days::day9::part2 as PartFunc),
         ((11u8, 1u8), days::day11::part1 as PartFunc),
         ((11u8, 2u8), days::day11::part2 as PartFunc),
+        ((12u8, 1u8), days::day12::part1 as PartFunc),
+        ((12u8, 2u8), days::day12::part2 as PartFunc),
     ]);
 }
 
