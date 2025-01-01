@@ -1,5 +1,3 @@
-:- initialization main.
-
 init :-
     read_2d_vector('inputs/day08.txt', Input),
     assert_vector(Input).

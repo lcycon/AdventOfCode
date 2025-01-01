@@ -1,10 +1,7 @@
-.PHONY: d8 d10 d13
+d%: days/day%.pl FORCE
+	swipl -f $< -g main -t halt
 
-d8: days/day8.pl
-	swipl $<
+d%i: days/day%.pl FORCE
+	swipl -f $<
 
-d10: days/day10.pl
-	swipl $<
-
-d13: days/day13.pl
-	swipl $<
+FORCE:

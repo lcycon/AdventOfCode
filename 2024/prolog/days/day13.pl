@@ -1,5 +1,4 @@
 :- use_module(library(clpfd)).
-:- initialization main.
 
 init(Data) :-
     set_prolog_flag(double_quotes, chars),

@@ -1,5 +1,4 @@
 :- table reachable_by_valid_trail/4.
-:- initialization main.
 
 main :-
     init,
