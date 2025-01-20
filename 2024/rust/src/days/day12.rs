@@ -4,7 +4,7 @@ use lazy_static::lazy_static;
 use matrix::{Element, format::Conventional, prelude::Transpose};
 use strum::IntoEnumIterator;
 
-use crate::util::Direction;
+use crate::util::{Direction, Point};
 
 lazy_static! {
     static ref EXTERIOR_CORNERS: [HashSet<crate::util::Direction>; 4] = [
@@ -57,11 +57,11 @@ impl Board {
 
         for row in 0..self.matrix.rows {
             for col in 0..self.matrix.columns {
-                if visited.contains(&(row, col)) {
+                if visited.contains(&(row, col).into()) {
                     continue;
                 }
 
-                let region = self.region_from_start(&mut visited, (row, col));
+                let region = self.region_from_start(&mut visited, (row, col).into());
                 regions.push(region);
             }
         }
@@ -69,11 +69,7 @@ impl Board {
         regions
     }
 
-    fn region_from_start(
-        &self,
-        visited: &mut HashSet<(usize, usize)>,
-        start: (usize, usize),
-    ) -> Region {
+    fn region_from_start(&self, visited: &mut HashSet<Point>, start: Point) -> Region {
         let mut to_visit = vec![start];
         let start_plant = self.matrix[start];
 
@@ -93,41 +89,17 @@ impl Board {
             let mut borders = 4;
             let neighbors = self.same_neighbors(current, start_plant);
 
-            if neighbors.contains(&Direction::Up) {
-                borders -= 1;
-                to_visit.push(
-                    Direction::Up
-                        .calculate_new_coords(current, self.matrix.rows, self.matrix.columns)
-                        .unwrap(),
-                );
-            }
-
-            if neighbors.contains(&Direction::Down) {
-                borders -= 1;
-                to_visit.push(
-                    Direction::Down
-                        .calculate_new_coords(current, self.matrix.rows, self.matrix.columns)
-                        .unwrap(),
-                );
-            }
-
-            if neighbors.contains(&Direction::Left) {
-                borders -= 1;
-                to_visit.push(
-                    Direction::Left
-                        .calculate_new_coords(current, self.matrix.rows, self.matrix.columns)
-                        .unwrap(),
-                );
-            }
-
-            if neighbors.contains(&Direction::Right) {
-                borders -= 1;
-                to_visit.push(
-                    Direction::Right
-                        .calculate_new_coords(current, self.matrix.rows, self.matrix.columns)
-                        .unwrap(),
-                );
-            }
+            Direction::ORTHOGONAL.iter().for_each(|dir| {
+                if neighbors.contains(dir) {
+                    borders -= 1;
+                    to_visit.push(
+                        current
+                            .to(*dir)
+                            .bounded(self.matrix.rows, self.matrix.columns)
+                            .unwrap(),
+                    );
+                }
+            });
 
             let exterior_corners = EXTERIOR_CORNERS
                 .iter()
@@ -172,14 +144,12 @@ impl Board {
         }
     }
 
-    fn same_neighbors(&self, (row, col): (usize, usize), plant: Plant) -> HashSet<Direction> {
+    fn same_neighbors(&self, point: Point, plant: Plant) -> HashSet<Direction> {
         crate::util::Direction::iter()
             .filter(|direction| {
-                let new_coord = direction.calculate_new_coords(
-                    (row, col),
-                    self.matrix.rows,
-                    self.matrix.columns,
-                );
+                let new_coord = point
+                    .to(*direction)
+                    .bounded(self.matrix.rows, self.matrix.columns);
 
                 if let Some(new_coord) = new_coord {
                     self.matrix[new_coord] == plant

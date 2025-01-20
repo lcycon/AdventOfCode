@@ -1,6 +1,7 @@
 #![feature(let_chains)]
+#![feature(duration_millis_float)]
 
-use std::collections::HashMap;
+use std::{collections::HashMap, time::Instant};
 
 use clap::Parser;
 use lazy_static::lazy_static;
@@ -24,6 +25,8 @@ lazy_static! {
         ((11u8, 2u8), days::day11::part2 as PartFunc),
         ((12u8, 1u8), days::day12::part1 as PartFunc),
         ((12u8, 2u8), days::day12::part2 as PartFunc),
+        ((15u8, 1u8), days::day15::part1 as PartFunc),
+        ((15u8, 2u8), days::day15::part2 as PartFunc),
     ]);
 }
 
@@ -50,7 +53,12 @@ fn main() {
     let input = std::fs::read_to_string(format!("inputs/day{:02}{example_string}.txt", args.day))
         .expect("Couldn't read input file");
 
+    let start_time = Instant::now();
+
     let answer = part_func(&input);
 
+    let elapsed_time = start_time.elapsed();
+
+    println!("Time: {:.2?}ms", elapsed_time.as_millis_f64());
     println!("Answer: {}", answer);
 }
