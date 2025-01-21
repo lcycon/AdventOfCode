@@ -86,4 +86,17 @@ impl Direction {
             Direction::DownLeft => Point { row: 1, col: -1 },
         }
     }
+
+    pub fn opposite(&self) -> Direction {
+        match self {
+            Direction::Up => Direction::Down,
+            Direction::Down => Direction::Up,
+            Direction::Left => Direction::Right,
+            Direction::Right => Direction::Left,
+            Direction::UpRight => Direction::DownLeft,
+            Direction::UpLeft => Direction::DownRight,
+            Direction::DownRight => Direction::UpLeft,
+            Direction::DownLeft => Direction::UpRight,
+        }
+    }
 }

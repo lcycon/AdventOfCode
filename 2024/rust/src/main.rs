@@ -27,6 +27,10 @@ lazy_static! {
         ((12u8, 2u8), days::day12::part2 as PartFunc),
         ((15u8, 1u8), days::day15::part1 as PartFunc),
         ((15u8, 2u8), days::day15::part2 as PartFunc),
+        ((16u8, 1u8), days::day16::part1 as PartFunc),
+        ((16u8, 2u8), days::day16::part2 as PartFunc),
+        ((17u8, 1u8), days::day17::part1 as PartFunc),
+        ((17u8, 2u8), days::day17::part2 as PartFunc),
     ]);
 }
 
